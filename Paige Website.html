@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Obsidian Choice - Text RPG</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-bg': '#FFC0CB', // Light Pink 
+                        'secondary-bg': '#BF6B99', // Slightly Darker Pink
+                        'accent': '#a78bfa', // Purple
+                        'text-light': '#000000', // Light Gray
+                        'text-muted': '#9ca3af', // Gray
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Georgia', 'serif'],
+                        mono: ['Courier Prime', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for a cleaner RPG look */
+        .game-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #4b5563; /* Gray-600 */
+        }
+        .option-button {
+            transition: all 0.15s ease-in-out;
+        }
+        .option-button:hover {
+            background-color: #4b5563; /* Gray-600 */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .option-button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-primary-bg min-h-screen p-4 flex items-center justify-center font-sans">
+
+    <!-- Game Container -->
+    <div id="game-container" class="w-full max-w-2xl bg-secondary-bg p-6 rounded-xl game-card">
+
+        <!-- Header -->
+        <h1 id="scene-title" class="text-3xl sm:text-4xl font-bold text-accent mb-4 text-center border-b border-gray-600 pb-2">
+            Game Title Placeholder
+        </h1>
+
+        <!-- Story Text -->
+        <div id="scene-text" class="text-text-light text-lg sm:text-xl font-serif leading-relaxed mb-6 bg-gray-700/50 p-4 rounded-lg">
+            Story text placeholder.
+        </div>
+
+        <!-- Options/Choices List -->
+        <div id="options-list" class="space-y-3">
+            <!-- Options will be injected here -->
+        </div>
+
+        <!-- Start Over/Input Area (Visible when needed) -->
+        <div id="input-area" class="mt-8">
+            <!-- The 'Start Over' button for end screens will appear here -->
+        </div>
+
+    </div>
+
+    <script>
+    
+
+        const adventureData = {
+            "START": {
+                title: "The First Homecoming Date",
+                text: "You awaken in a clearing. A worn, sunlit path leads East, and a dark, narrow cave entrance lies to the North. Which way do you go?",
+                options: [
+                    { text: "1. Take the first path (ChickFilA).", nextId: "Chick_Fil_A" },
+                    { text: "2. Dangerous Path of Knifes (Pumpkin Carving).", nextId: "Initiate first kiss" }
+                ]
+            },
+            "Chick_Fil_A": {
+                title: "What are you going to do?",
+                text: "The path opens up to a sparkling stream, but a low, stone wall blocks the way. You hear a strange, rhythmic clicking sound from the bushes.",
+                options: [
+                    { text: "1. Initiate the first kiss.", nextId: "]BUSH_INVESTIGATE" },
+                    { text: "2. Carefully climb the stone wall.", nextId: "STREAM_CROSS" }
+                ]
+            },
+            "CAVE_NORTH": {
+                title: "The Silent Cavern",
+                text: "The cave air is cold and heavy with the smell of damp earth. You find a faded map on the ground, showing two tunnels: one short, one long.",
+                options: [
+                    { text: "1. Follow the short tunnel (Risky).", nextId: "SHORT_TUNNEL" },
+                    { text: "2. Follow the long tunnel (Cautious).", nextId: "LONG_TUNNEL" }
+                ]
+            },
+            "BUSH_INVESTIGATE": {
+                title: "The Guardian Frog",
+                text: "You find a gigantic, bioluminescent frog guarding a small chest. It seems docile but protective. You could try to talk to it or sneak past.",
+                options: [
+                    { text: "1. Attempt to communicate with the frog.", nextId: "FROG_TALK" },
+                    { text: "2. Try to quickly sneak past to the chest.", nextId: "FROG_SNEAK" }
+                ]
+            },
+            "STREAM_CROSS": {
+                title: "The Waterfall's Secret",
+                text: "You successfully cross the wall and find yourself behind a shimmering waterfall. Behind the water, you see a hidden chamber!",
+                options: [
+                    { text: "1. Enter the hidden chamber.", nextId: "END_SUCCESS_WATERFALL" },
+                    { text: "2. Return to the path and look for another way.", nextId: "PATH_EAST" } // Loop back
+                ]
+            },
+            "FROG_TALK": {
+                title: "A Shared Secret",
+                text: "The frog seems to understand your plea and points a webbed finger toward a large, ornate gate hidden in the rock face. You've earned its trust!",
+                options: [
+                    { text: "1. Proceed through the ornate gate.", nextId: "END_SUCCESS_FROG" }
+                ]
+            },
+            "FROG_SNEAK": {
+                title: "Swift Justice",
+                text: "You attempt to sneak, but the frog's reflexes are too fast. Its tongue snaps out, and the last thing you see is the glow fading to black.",
+                options: [
+                    { text: "Retry Adventure", nextId: "END_DEFEAT_FROG" }
+                ]
+            },
+            "SHORT_TUNNEL": {
+                title: "A Narrow Escape",
+                text: "The tunnel collapses just after you pass through! You emerge blinking into daylight, standing at the edge of the woods, holding a strange silver key.",
+                options: [
+                    { text: "1. Use the key to unlock your destiny.", nextId: "END_SUCCESS_KEY" }
+                ]
+            },
+            "LONG_TUNNEL": {
+                title: "The Abyss",
+                text: "The long tunnel leads deeper and deeper. Eventually, the air runs out, and you realize you have walked into a geological trap.",
+                options: [
+                    { text: "Retry Adventure", nextId: "END_DEFEAT_ABYSS" }
+                ]
+            },
+
+            // =========================================================================
+            // END SCENES (You can customize the messages for all endings)
+            // =========================================================================
+
+            "END_SUCCESS_WATERFALL": {
+                title: "Grand Discovery!",
+                text: "You enter the chamber and find it filled with ancient scrolls and glowing crystals. You have achieved an incredible scholarly victory!",
+                options: [{ text: "Start a New Adventure", nextId: "START" }]
+            },
+            "END_SUCCESS_FROG": {
+                title: "The Adventurer's Gift",
+                text: "The gate opens to reveal a magical spring. You bathe in its waters and gain incredible wisdom. A true heroic ending!",
+                options: [{ text: "Start a New Adventure", nextId: "START" }]
+            },
+            "END_SUCCESS_KEY": {
+                title: "The Key to the City",
+                text: "The silver key unlocks a secret portal leading not just out of the woods, but to a vast, bustling metropolis where you become a respected leader.",
+                options: [{ text: "Start a New Adventure", nextId: "START" }]
+            },
+            "END_DEFEAT_FROG": {
+                title: "A Meal for the Frog",
+                text: "Your attempt at stealth was foolish. The jungle reclaims another victim.",
+                options: [{ text: "Try Again (START)", nextId: "START" }]
+            },
+            "END_DEFEAT_ABYSS": {
+                title: "Lost to the Deep",
+                text: "A dark, suffocating death. The long way is not always the safe way.",
+                options: [{ text: "Try Again (START)", nextId: "START" }]
+            }
+        };
+
+        // =========================================================================
+        // 2. GAME LOGIC
+        // =========================================================================
+
+        // State variables
+        let currentSceneId = "START";
+
+        // DOM Elements
+        const titleEl = document.getElementById('scene-title');
+        const textEl = document.getElementById('scene-text');
+        const optionsListEl = document.getElementById('options-list');
+
+        /**
+         * Renders the current scene based on the scene ID.
+         * @param {string} sceneId - The ID of the scene to render.
+         */
+        function renderScene(sceneId) {
+            const scene = adventureData[sceneId];
+
+            if (!scene) {
+                console.error("Scene not found:", sceneId);
+                return;
+            }
+
+            // Update state
+            currentSceneId = sceneId;
+
+            // Update UI elements
+            titleEl.textContent = scene.title;
+            textEl.textContent = scene.text;
+            optionsListEl.innerHTML = ''; // Clear previous options
+
+            // Render buttons for each option
+            scene.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                const choiceNumber = index + 1;
+
+                // Add button classes for styling
+                button.className = 'option-button w-full text-left bg-gray-700 hover:bg-gray-600 text-text-light py-3 px-4 rounded-lg shadow-md font-mono text-base sm:text-lg transition duration-150 ease-in-out';
+                
+                // Display the option text (which already includes the number)
+                button.textContent = option.text;
+
+                // Attach event listener to handle the choice
+                button.onclick = () => handleChoice(choiceNumber);
+
+                optionsListEl.appendChild(button);
+            });
+        }
+
+        /**
+         * Handles the user's choice (by number) and advances the game.
+         * @param {number} choiceNumber - The 1-based index of the chosen option.
+         */
+        function handleChoice(choiceNumber) {
+            const currentScene = adventureData[currentSceneId];
+            // Options are 0-indexed, so subtract 1 from the choice number
+            const choiceIndex = choiceNumber - 1;
+
+            if (currentScene && currentScene.options[choiceIndex]) {
+                const nextId = currentScene.options[choiceIndex].nextId;
+                renderScene(nextId);
+            } else {
+                // If the user somehow clicks an invalid option, log an error
+                console.error("Invalid choice for scene:", currentSceneId, "Choice:", choiceNumber);
+            }
+        }
+
+        // Initialize the game when the window loads
+        window.onload = function() {
+            // Start the game by rendering the initial scene
+            renderScene("START");
+        };
+
+    </script>
+</body>
+</html>

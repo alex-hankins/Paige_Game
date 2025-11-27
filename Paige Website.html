@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Obsidian Choice - Text RPG</title>
+    <title> My Perfect Girlfriend - Text RPG</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,10 +12,10 @@
                 extend: {
                     colors: {
                         'primary-bg': '#FFC0CB', // Light Pink 
-                        'secondary-bg': '#BF6B99', // Slightly Darker Pink
-                        'accent': '#a78bfa', // Purple
+                        'secondary-bg': '#FFEE8C', // Yellow
+                        'accent': '#000000', // Black 
                         'text-light': '#000000', // Light Gray
-                        'text-muted': '#9ca3af', // Gray
+                        'text-muted': '#b5d29e', // Gray
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -56,7 +56,7 @@
         </h1>
 
         <!-- Story Text -->
-        <div id="scene-text" class="text-text-light text-lg sm:text-xl font-serif leading-relaxed mb-6 bg-gray-700/50 p-4 rounded-lg">
+        <div id="scene-text" class="text-text-light text-lg sm:text-xl font-serif leading-relaxed mb-6 bg-primary-bg p-4 rounded-lg">
             Story text placeholder.
         </div>
 
@@ -77,65 +77,94 @@
 
         const adventureData = {
             "START": {
-                title: "The First Homecoming Date",
-                text: "You awaken in a clearing. A worn, sunlit path leads East, and a dark, narrow cave entrance lies to the North. Which way do you go?",
+                title: "Happy Three Year Anniversary My Love",
+                text: "There are so many choices we make in life and they must all have aligned perfectly because I am with you. I know you don't play games but I hope you like this one! Start off by choosing a path!",
                 options: [
-                    { text: "1. Take the first path (ChickFilA).", nextId: "Chick_Fil_A" },
-                    { text: "2. Dangerous Path of Knifes (Pumpkin Carving).", nextId: "Initiate first kiss" }
+                    { text: "1. Time Travel", nextId: "PATH_OF_KNIFES" },
+                    { text: "2. Summer of Love", nextId: "CALIFORNIA_SURP" }
                 ]
             },
-            "Chick_Fil_A": {
-                title: "What are you going to do?",
-                text: "The path opens up to a sparkling stream, but a low, stone wall blocks the way. You hear a strange, rhythmic clicking sound from the bushes.",
+            "PATH_OF_KNIFES": {
+                title: "You have arrived to the most famous second date!",
+                text: "An evening of pizza, pumpkin carving, and fireworks has created nothing shy of the perfect night for a little smooch. What do you choose?",
                 options: [
-                    { text: "1. Initiate the first kiss.", nextId: "]BUSH_INVESTIGATE" },
-                    { text: "2. Carefully climb the stone wall.", nextId: "STREAM_CROSS" }
+                    { text: "1. Initiate the first kiss.", nextId: "JUMP_FOR_JOY" },
+                    { text: "2. Ill wait for him to initiate.", nextId: "END_KISS" }
                 ]
             },
-            "CAVE_NORTH": {
-                title: "The Silent Cavern",
-                text: "The cave air is cold and heavy with the smell of damp earth. You find a faded map on the ground, showing two tunnels: one short, one long.",
+            "CALIFORNIA_SURP": {
+                title: "The Great Surprise",
+                text: "Sitting on the patio of the Airbnb, the unsuspecting boy goes to help his mom grab a fathers day gift. Despite the day not being for him, he gets the best surprise ever ... his beautiful girlfriend right outside! I will cherish this memory forever, you really got me so good. Now, you can choose to either stay in California or travel to Arizona!",
                 options: [
-                    { text: "1. Follow the short tunnel (Risky).", nextId: "SHORT_TUNNEL" },
-                    { text: "2. Follow the long tunnel (Cautious).", nextId: "LONG_TUNNEL" }
+                    { text: "1. Poke the cacti", nextId: "ARIZONA_SUMM" },
+                    { text: "2. Catch some waves", nextId: "CALI_SUMM" }
                 ]
             },
-            "BUSH_INVESTIGATE": {
-                title: "The Guardian Frog",
-                text: "You find a gigantic, bioluminescent frog guarding a small chest. It seems docile but protective. You could try to talk to it or sneak past.",
+            "JUMP_FOR_JOY": {
+                title: "Jump for Joy!",
+                text: "Left in excitement, I do a jump with excitement as you leave. The most beautiful girl in the world kissing me??? Lets see how well you remember a very special night... What did I order the night after I first said I love you?",
                 options: [
-                    { text: "1. Attempt to communicate with the frog.", nextId: "FROG_TALK" },
-                    { text: "2. Try to quickly sneak past to the chest.", nextId: "FROG_SNEAK" }
+                    { text: "1. Bacon Wrapped Tenderloin.", nextId: "TENDERLOIN" },
+                    { text: "2. Miso Glazed Salmon.", nextId: "END_POINTE" }
                 ]
             },
-            "STREAM_CROSS": {
-                title: "The Waterfall's Secret",
-                text: "You successfully cross the wall and find yourself behind a shimmering waterfall. Behind the water, you see a hidden chamber!",
+            "ARIZONA_SUMM": {
+                title: "My favorite camping trip",
+                text: "I have camped literal hundreds of nights and none were quite as special as the night I got to spend camping with you. This is for sure a favorite summer memory of mine and it fulfilled so many of my dreams. S'mores over the fire, meteor shower, great views, and incredible you know what. I was so excited to get to show off my camping skills. Let's see how well you remember! How many feet away from your tent should you keep food at night?",
                 options: [
-                    { text: "1. Enter the hidden chamber.", nextId: "END_SUCCESS_WATERFALL" },
-                    { text: "2. Return to the path and look for another way.", nextId: "PATH_EAST" } // Loop back
+                    { text: "At least 300ft", nextId: "CAMP_SUCCESS" },
+                    { text: "At least 100ft", nextId: "CAMP_FAIL" } 
                 ]
             },
-            "FROG_TALK": {
-                title: "A Shared Secret",
-                text: "The frog seems to understand your plea and points a webbed finger toward a large, ornate gate hidden in the rock face. You've earned its trust!",
+            "CALI_SUMM": {
+                title: "Arctic to the Amazon",
+                text: "Possibly the best birthday gift of all time, so many animals! To pass this challenge you must choose which animal was my favorite from this adventure.",
                 options: [
-                    { text: "1. Proceed through the ornate gate.", nextId: "END_SUCCESS_FROG" }
+                    { text: "1. Koala", nextId: "END_SUCCESS_KOALA" },
+                    { text: "2. Panda", nextId: "END_PANDA" }
                 ]
+ 	     },
+            "TENDERLOIN": {
+                title: "So yummy",
+                text: "Such a nice evening with the great food and the best date. I miss you so much when we are apart and love to make the most of the time we have together. I try to plan all of the trips out to the second but my favorite dates have been ones where we do an adventure by ferry. I know you love them! For the next stop choose to hop on a ferry to either of the two places we have been!",
+                options: [
+                    { text: "1. Alki Beach", nextId: "ALKI" },
+                    { text: "2. Bainbridge Island", nextId: "BAINBRIDGE" }
+                ]
+
             },
-            "FROG_SNEAK": {
-                title: "Swift Justice",
-                text: "You attempt to sneak, but the frog's reflexes are too fast. Its tongue snaps out, and the last thing you see is the glow fading to black.",
+            "ALKI": {
+                title: "The closest to a sunny beach day in Seattle you can get!",
+                text: "It seems like ferry rides make us hungry for Mexican food. I loved walking along the beach with you and soaking up the view of Seattle from a far. If you remember, we saw a jellyfish while sitting on the water. Do you remember the type of jellyfish?",
                 options: [
-                    { text: "Retry Adventure", nextId: "END_DEFEAT_FROG" }
+                    { text: "Four ringed jelly", nextId: "ALKI_FAIL" },
+                    { text: "Moon Jelly", nextId: "ALKI_SUCCESS" }
                 ]
-            },
-            "SHORT_TUNNEL": {
-                title: "A Narrow Escape",
-                text: "The tunnel collapses just after you pass through! You emerge blinking into daylight, standing at the edge of the woods, holding a strange silver key.",
+	      },
+            "BAINBRIDGE": {
+                title: "Coffee, crabs, trolls, books, and Mexican food. Did we die and go to heaven?",
+                text: "So many cute parts from this day, including you sleeping in the car waiting for the ferry. To pass this next challenge, you must remember the name of the troll we saw on the island!",
                 options: [
-                    { text: "1. Use the key to unlock your destiny.", nextId: "END_SUCCESS_KEY" }
+                    { text: "Patricia the Pia the Peace Keeper", nextId: "BAINBRIDGE_SUCCESS" },
+                    { text: "Alex", nextId: "BAINBRIDGE_FAIL" }
                 ]
+	      },
+            "CALI_DATE_2": {
+                title: "I literally do not think my life can get better than this.",
+                text: "First off we are literally in California. Pickleball, golf, and beach days are always incredible but almost expected. Surfing together, seeing my best friend Mark, and Pageant of the Masters was CRAZY. I am so grateful for you and for how many amazing life experiences I have because of you. To pass, what is the surfing vocab word for incoming waves because of a swell",
+                options: [
+                    { text: "A set", nextId: "SURF_SUCCESS" },
+                    { text: "A lift", nextId: "SURF_FAIL" }
+                ]
+ 		},
+            "CONCERT": {
+                title: "Life could not get Higher",
+                text: "So many songs remind me of you and Chris Stapleton is the artist behind a lot of them. What was my favorite song from this concert?",
+                options: [
+                    { text: "White Horse", nextId: "CONCERT_FAIL" },
+                    { text: "Cold", nextId: "CONCERT_SUCCESS" }
+                ]
+
             },
             "LONG_TUNNEL": {
                 title: "The Abyss",
@@ -145,33 +174,106 @@
                 ]
             },
 
+
             // =========================================================================
             // END SCENES (You can customize the messages for all endings)
             // =========================================================================
 
             "END_SUCCESS_WATERFALL": {
-                title: "Grand Discovery!",
-                text: "You enter the chamber and find it filled with ancient scrolls and glowing crystals. You have achieved an incredible scholarly victory!",
+                title: "TEST",
+                text: "test.not.used",
                 options: [{ text: "Start a New Adventure", nextId: "START" }]
             },
-            "END_SUCCESS_FROG": {
-                title: "The Adventurer's Gift",
-                text: "The gate opens to reveal a magical spring. You bathe in its waters and gain incredible wisdom. A true heroic ending!",
-                options: [{ text: "Start a New Adventure", nextId: "START" }]
+            "END_SUCCESS_KOALA": {
+                title: "The Australian Treasure",
+                text: "The koalas felt like I was one step closer to being with Steve Irwin. It was so cool how they were just chilling all over the place in their habitat. To continue, click on the on Cali to choose another favorite memory or start from the beginning!",
+                options: [{ text: "Next Cali Date", nextId: "CALI_DATE_2" },
+			      { text: "Restart Game", nextId: "START" }
+			]
             },
-            "END_SUCCESS_KEY": {
-                title: "The Key to the City",
-                text: "The silver key unlocks a secret portal leading not just out of the woods, but to a vast, bustling metropolis where you become a respected leader.",
-                options: [{ text: "Start a New Adventure", nextId: "START" }]
+            "ALKI_FAIL": {
+                title: "Sorry... I made that name up",
+                text: "Jack Johnson has a good song about jellyfish just floating around and how we should be more like jellyfish. You must be a jellyfish because I get stunned by your beauty every time I see you! Feel Free to try again or restart!",
+                options: [{ text: "Try again", nextId: "ALKI" },
+			      { text: "Restart Game", nextId: "START" }
+			]
             },
-            "END_DEFEAT_FROG": {
-                title: "A Meal for the Frog",
-                text: "Your attempt at stealth was foolish. The jungle reclaims another victim.",
-                options: [{ text: "Try Again (START)", nextId: "START" }]
+            "ALKI_SUCCESS": {
+                title: "Are you secretly studying marine biology?",
+                text: "Located all over the world, moon jellies are actually safe to touch. For the most part... You made it to the end of this segment, show proof and I will personally give you a foot massage.",
+                options: [
+			      { text: "Restart Game", nextId: "START" }
+			]
             },
-            "END_DEFEAT_ABYSS": {
-                title: "Lost to the Deep",
-                text: "A dark, suffocating death. The long way is not always the safe way.",
+            "BAINBRIDGE_SUCCESS": {
+                title: "The troll gifted you with incredible memory!",
+                text: "I really do love how much of Seattle and Nashville we have seen. It is one of the benefits of being long distance in that we get to experience and show each other our favorite spots, and explore new places together! You are the most amazing girlfriend and I can not wait for the future when we revisit our college towns and go to our favorite date spots. Din Tai Fung will be another mandatory stop. Dont forget to redeem your kiss! Unless you selected Alex first for the troll name.",
+                options: [{ text: "Restart Game", nextId: "START" }
+			]
+            },
+            "BAINBRIDGE_FAIL": {
+                title: "Ill try not to take too much offense to this one...",
+                text: "You can take a girl out, feed her, and try to impress her but I suppose my charming actions weren't quite enough.",
+                options: [{ text: "Ill try to be nice", nextId: "BAINBRIDGE" },
+			      
+			]
+	      },
+            "SURF_SUCCESS": {
+                title: "Kelly Slater?",
+                text: "I cant wait to surf together this summer and maybe even in Costa Rica! You look so good on a board and I love our outdoor adventures! Show proof of your surf knowledge to redeem a totally radical kiss.",
+                options: [
+                    { text: "Restart", nextId: "START" }
+                ]
+	      },
+            "SURF_FAIL": {
+                title: "Butt smacked the sand on this one",
+                text: "We clearly need to rewatch surfs up. Even if you dont end up going pro, I will try to put on a show for you.",
+                options: [
+                    { text: "Try again", nextId: "CALI_DATE_2" }
+                ]
+	      },
+            "END_PANDA": {
+                title: "Might be a close second",
+                text: "I spent a lot of time thinking of my own answer to this question. I am glad we went to see the pandas first, they were so cute! But to be honest I was a little distracted looking at how pretty you were.",
+                options: [
+                    { text: "Try again", nextId: "CALI_SUMM" }
+                ]
+            },
+            "CAMP_SUCCESS": {
+                title: "You are officially ready for any survival situation!",
+                text: "Thank you for trusting me to take you on this camping adventure, even if your mom may have tried to talk you out of it. We made the most of each day this summer and I like to think going to see Chris Stapleton was really up there as one of the highlights of our Arizona dates!",
+                options: [{ text: "Shred the guitar", nextId: "CONCERT" },
+			      { text: "Restart Game", nextId: "START" }]
+            },
+ 	    "CAMP_FAIL": {
+                title: "Bear food!",
+                text: "To be fair I dont always follow this by the book. Lucky nothing came to give us a visit but I obviously would have protected my girl.",
+                options: [{ text: "Retry!", nextId: "ARIZONA_SUMM" }]
+            },
+            "END_POINTE": {
+                title: "Maybe we should go back and try it",
+                text: "It was a hard choice but we both got the bacon wrapped tenderloin. My mouth is watering just thinking about you. I mean the dinner...",
+                options: [{ text: "Try Again", nextId: "JUMP_FOR_JOY" }]
+            },
+            "CONCERT_SUCCESS": {
+                title: "You know me so well",
+                text: "So hot you are the furthest thing from cold, but this is such a great song. I drool looking at the pics of you from that night. Your prize is a five minute back massage!",
+                options: [
+			      { text: "Restart Game", nextId: "START" }
+			]
+            },
+            "CONCERT_FAIL": {
+                title: "Close...",
+                text: "This was maybe a trick question because I had so many favorites. However, you are in luck because I do have a white horse for you ;)",
+                options: [
+			      { text: "Try again", nextId: "CONCERT" },
+			      { text: "Restart Game", nextId: "START" }
+			]
+           
+            },
+            "END_KISS": {
+                title: "not quite!",
+                text: "Although a good attempt, we all know you were planning to kiss this handsome face from the beginning of the night!",
                 options: [{ text: "Try Again (START)", nextId: "START" }]
             }
         };
@@ -214,7 +316,7 @@
                 const choiceNumber = index + 1;
 
                 // Add button classes for styling
-                button.className = 'option-button w-full text-left bg-gray-700 hover:bg-gray-600 text-text-light py-3 px-4 rounded-lg shadow-md font-mono text-base sm:text-lg transition duration-150 ease-in-out';
+                button.className = 'option-button w-full text-left bg-primary-bg hover:bg-gray-600 text-text-light py-3 px-4 rounded-lg shadow-md font-mono text-base sm:text-lg transition duration-150 ease-in-out';
                 
                 // Display the option text (which already includes the number)
                 button.textContent = option.text;
